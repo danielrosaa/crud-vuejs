@@ -45,6 +45,25 @@ export default new Vuex.Store({
       } catch (e) {
         console.error("Error trying to delete user", e);
       }
+    },
+    editUser({ commit }, payload) {
+      const id = payload[1],
+        update = payload[0];
+      try {
+        Axios.put(`/users/${id}`, {
+          name: update.nome,
+          phone: update.tel
+        });
+        this.state.users.forEach(el => {
+          if (el.id === id) {
+            el.name = update.nome;
+            el.phone = update.tel;
+          }
+        });
+        commit("saveUsers", this.state.users);
+      } catch (e) {
+        console.error("Error trying to update user", e);
+      }
     }
   }
 });
