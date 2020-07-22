@@ -1,4 +1,7 @@
-# crud-justto
+# Vuejs CRUD
+
+## About
+Simple Vuejs CRUD with just the basic features.
 
 ## Project setup
 ```
@@ -15,10 +18,3 @@ yarn serve
 yarn build
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
