@@ -1,4 +1,4 @@
 module.exports = {
-  publicPath: "crud-vuejs",
+  publicPath: "/crud-vuejs",
   outputDir: "./docs"
 };
