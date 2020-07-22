@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="adicionar">
-      <h4 style="margin-bottom: 5px">Adicionar usuário</h4>
+      <h4 style="margin-bottom: 5px; text-align:center">Adicionar usuário</h4>
       <hr style="width:100%; margin: 0" />
       <label for="nome">Nome</label>
       <input v-model="nome" type="text" id="nome" />
@@ -36,12 +36,16 @@ export default {
     };
   },
   methods: {
+    resetForm() {
+      (this.nome = ""), (this.tel = "");
+    },
     addUser() {
       const user = {
         name: this.nome,
         phone: this.tel
       };
       this.$store.dispatch("addUser", user);
+      this.resetForm();
     }
   },
   mounted() {

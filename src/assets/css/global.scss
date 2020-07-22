@@ -69,37 +69,38 @@ label {
 
 button {
   outline: none;
+  color: #FFF;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  min-width: 25px;
   background-color: #00000008;
-  border-radius: 5px;
+  border: 0;
+  border-radius: 2px;
   padding: 5px;
   transition: all 300ms;
   &.success {
-    border: 1px solid lightgreen;
-    color: green;
+    background-color: rgb(9, 168, 9);
     &:hover {
-        background: rgba($color: green, $alpha: 0.2);
+        background: rgba($color: rgb(9, 168, 9), $alpha: 0.7);
     }
     
   }
   &.danger {
-    border: 1px solid salmon;
-    color: salmon;
+    background: rgb(209, 90, 77);
     &:hover {
-        background: rgba($color: salmon, $alpha: 0.2);
+        background: rgba($color: rgb(209, 90, 77), $alpha: 0.7);
     }
   }
   &.warning {
-    border: 1px solid coral;
-    color: coral;
+    background: rgb(184, 145, 39);
     &:hover {
-        background: rgba($color: coral, $alpha: 0.2);
+        background: rgba($color: rgb(184, 145, 39), $alpha: 0.7);
     }
   }
   &.info {
-    border: 1px solid lightseagreen;
-    color: lightseagreen;
+    background: rgb(43, 152, 199);
     &:hover {
-        background: rgba($color: lightseagreen, $alpha: 0.2);
+        background: rgba($color: rgb(43, 152, 199), $alpha: 0.7);
     }
   }
 }

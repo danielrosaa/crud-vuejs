@@ -26,4 +26,32 @@
 .fade-move {
   transition: transform 300ms;
 }
+
+@media screen and (max-width: 1100px) {
+  .container {
+    display: block !important;
+  }
+  .adicionar {
+    margin: 0;
+    button {
+      width: 30%;
+      position: relative;
+      margin-right: 0 !important;
+    }
+  }
+  .user {
+    padding: 0 !important;
+  }
+}
+@media screen and (max-width: 750px) {
+  .container {
+    width: 90% !important;
+    .adicionar {
+      margin-right: 0 !important;
+    }
+  }
+  .modal {
+    width: auto !important;
+  }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="user">
+  <div class="user" :class="alterado && 'alterado'">
     <div>
       {{ user.name }}
     </div>
@@ -8,9 +8,11 @@
     </div>
     <div class="actions">
       <button @click="showEdit = true" class="info">
-        Editar
+        <fa-icon icon="edit"></fa-icon>
       </button>
-      <button @click="removeUser(user.id)" class="danger">Remover</button>
+      <button @click="removeUser(user.id)" class="danger">
+        <fa-icon icon="trash"></fa-icon>
+      </button>
     </div>
     <transition name="fade">
       <div v-if="showEdit" class="modal">
@@ -29,6 +31,9 @@
 </template>
 
 <script>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+library.add(faEdit, faTrash);
 export default {
   props: ["user"],
   data() {
@@ -36,7 +41,7 @@ export default {
       showEdit: false,
       nome: null,
       tel: null,
-      remove: false
+      alterado: false
     };
   },
   methods: {
@@ -47,6 +52,11 @@ export default {
     editUser(update, id) {
       this.$store.dispatch("editUser", [update, id]);
       this.showEdit = false;
+      this.alterado = true;
+      setTimeout(() => {
+        this.alterado = false;
+      }, 1500);
+      // 1500 é o tempo da duração da animação
     }
   },
   mounted() {
@@ -82,6 +92,9 @@ export default {
       }
     }
   }
+  &.alterado {
+    animation: bounce 1.5s;
+  }
 }
 .modal {
   position: fixed;
@@ -106,5 +119,17 @@ export default {
     padding: 10px;
     cursor: pointer;
   }
+}
+
+@keyframes bounce {
+  // 25% {
+  //   transform: translateX(-10px);
+  // }
+  50% {
+    background: lighten($color: lightgreen, $amount: 20);
+  }
+  // 75% {
+  //   transform: translateX(20px);
+  // }
 }
 </style>
