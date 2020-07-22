@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+button {
+  outline: none;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 5px;
+  transition: all 300ms;
+  &.success {
+    border: 1px solid lightgreen;
+    color: green;
+    &:hover {
+        background: rgba($color: green, $alpha: 0.2);
+    }
+    
+  }
+  &.danger {
+    border: 1px solid salmon;
+    color: salmon;
+    &:hover {
+        background: rgba($color: salmon, $alpha: 0.2);
+    }
+  }
+  &.warning {
+    border: 1px solid coral;
+    color: coral;
+    &:hover {
+        background: rgba($color: coral, $alpha: 0.2);
+    }
+  }
+  &.info {
+    border: 1px solid lightseagreen;
+    color: lightseagreen;
+    &:hover {
+        background: rgba($color: lightseagreen, $alpha: 0.2);
+    }
+  }
+}
