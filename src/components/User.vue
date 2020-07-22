@@ -16,15 +16,25 @@
     </div>
     <transition name="fade">
       <div v-if="showEdit" class="modal">
-        <div @click="showEdit = false" class="fechar">x</div>
-        <h4>Atualizar usuário</h4>
-        <label for="nome">Nome</label>
-        <input v-model="nome" type="text" id="nome" />
-        <label for="tel">Telefone</label>
-        <input v-model="tel" type="text" id="tel" />
-        <button @click="editUser({ nome, tel }, user.id)" class="success">
-          Alterar
-        </button>
+        <form>
+          <div @click="showEdit = false" class="fechar">x</div>
+          <h4>Atualizar usuário</h4>
+          <transition name="fade">
+            <div v-if="error" class="error">
+              Todos os campos são necessários
+            </div>
+          </transition>
+          <label for="nome">Nome</label>
+          <input v-model="nome" type="text" id="nome" />
+          <label for="tel">Telefone</label>
+          <input v-model="tel" type="text" id="tel" />
+          <button
+            @click.prevent="editUser({ nome, tel }, user.id)"
+            class="success"
+          >
+            Alterar
+          </button>
+        </form>
       </div>
     </transition>
   </div>
@@ -41,7 +51,8 @@ export default {
       showEdit: false,
       nome: null,
       tel: null,
-      alterado: false
+      alterado: false,
+      error: false
     };
   },
   methods: {
@@ -50,13 +61,18 @@ export default {
       this.$store.dispatch("removeUser", id);
     },
     editUser(update, id) {
-      this.$store.dispatch("editUser", [update, id]);
-      this.showEdit = false;
-      this.alterado = true;
-      setTimeout(() => {
-        this.alterado = false;
-      }, 1500);
-      // 1500 é o tempo da duração da animação
+      if (this.nome !== "" && this.tel !== "") {
+        this.$store.dispatch("editUser", [update, id]);
+        this.showEdit = false;
+        this.alterado = true;
+        this.error = false;
+        setTimeout(() => {
+          this.alterado = false;
+        }, 1500);
+        // 1500 é o tempo da duração da animação
+      } else {
+        this.error = true;
+      }
     }
   },
   mounted() {
@@ -97,8 +113,10 @@ export default {
   }
 }
 .modal {
+  form {
+    display: grid;
+  }
   position: fixed;
-  display: grid;
   top: 15vh;
   border-radius: 5px;
   padding: 30px;
@@ -122,14 +140,8 @@ export default {
 }
 
 @keyframes bounce {
-  // 25% {
-  //   transform: translateX(-10px);
-  // }
   50% {
     background: lighten($color: lightgreen, $amount: 20);
   }
-  // 75% {
-  //   transform: translateX(20px);
-  // }
 }
 </style>

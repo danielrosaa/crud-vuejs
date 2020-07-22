@@ -27,6 +27,16 @@
   transition: transform 300ms;
 }
 
+.error {
+  text-align: center;
+  font-size: 0.8em;
+  width: 100%;
+  border-radius: 2px;
+  color: red;
+  background: rgba(209, 90, 77, 0.2);
+  padding: 5px 0;
+}
+
 @media screen and (max-width: 1100px) {
   .container {
     display: block !important;

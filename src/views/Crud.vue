@@ -2,12 +2,23 @@
   <div class="container">
     <div class="adicionar">
       <h4 style="margin-bottom: 5px; text-align:center">Adicionar usuário</h4>
-      <hr style="width:100%; margin: 0" />
-      <label for="nome">Nome</label>
-      <input v-model="nome" type="text" id="nome" />
-      <label for="tel">Telefone</label>
-      <input v-model="tel" type="text" id="tel" />
-      <button @click="addUser" class="success">Adicionar</button>
+      <hr style="width:100%; margin: 0; margin-bottom: 10px" />
+      <form>
+        <transition name="fade">
+          <div v-if="error" class="error">
+            Todos os campos são necessários
+          </div>
+        </transition>
+        <div class="form-item">
+          <label for="nome">Nome</label>
+          <input v-model="nome" type="text" id="nome" />
+        </div>
+        <div class="form-item">
+          <label for="tel">Telefone</label>
+          <input v-model="tel" type="text" id="tel" />
+        </div>
+        <button @click.prevent="addUser" class="success">Adicionar</button>
+      </form>
     </div>
     <div class="lista">
       <ul>
@@ -32,7 +43,8 @@ export default {
   data() {
     return {
       nome: "",
-      tel: ""
+      tel: "",
+      error: false
     };
   },
   methods: {
@@ -44,8 +56,13 @@ export default {
         name: this.nome,
         phone: this.tel
       };
-      this.$store.dispatch("addUser", user);
-      this.resetForm();
+      if (this.nome !== "" && this.tel !== "") {
+        this.$store.dispatch("addUser", user);
+        this.resetForm();
+        this.error = false;
+      } else {
+        this.error = true;
+      }
     }
   },
   mounted() {
@@ -72,6 +89,11 @@ export default {
     button,
     label {
       margin-top: 10px;
+    }
+    .form-item {
+      input {
+        width: 100%;
+      }
     }
   }
   .lista {
