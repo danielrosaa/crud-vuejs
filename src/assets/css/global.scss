@@ -1,10 +1,75 @@
-body {
-    margin: 0;
-    padding: 0;
+@import "./variables";
+
+@font-face {
+  font-family: Prata;
+  font-style: normal;
+  src: url("~@/assets/fonts/Prata/Prata-Regular.ttf");
 }
+@font-face {
+  font-family: Quicksand;
+  font-style: normal;
+  font-weight: normal;
+  src: url("~@/assets/fonts/Quicksand/Quicksand-Regular.ttf");
+}
+@font-face {
+  font-family: Quicksand;
+  font-style: normal;
+  font-weight: 100;
+  src: url("~@/assets/fonts/Quicksand/Quicksand-Light.ttf");
+}
+@font-face {
+  font-family: Quicksand;
+  font-style: normal;
+  font-weight: 200;
+  src: url("~@/assets/fonts/Quicksand/Quicksand-Medium.ttf");
+}
+@font-face {
+  font-family: Quicksand;
+  font-style: normal;
+  font-weight: bold;
+  src: url("~@/assets/fonts/Quicksand/Quicksand-Bold.ttf");
+}
+body {
+  font-family: "Quicksand";
+  font-weight: normal;
+  background: $bgColor;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Prata";
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: goldenrod;
+}
+
+input {
+  font-family: "Quicksand";
+  padding: 5px;
+  font-size: 1.1em;
+  outline: none;
+  background: #EEE;
+  border: 0;
+}
+
+label {
+  font-weight: bold;
+}
+
 button {
   outline: none;
-  background-color: transparent;
+  background-color: #00000008;
   border-radius: 5px;
   padding: 5px;
   transition: all 300ms;

@@ -1,18 +1,21 @@
 <template>
   <div class="container">
     <div class="adicionar">
-      <h4>Adicionar usuário</h4>
-      <label for="nome">Nome</label><br />
+      <h4 style="margin-bottom: 5px">Adicionar usuário</h4>
+      <hr style="width:100%; margin: 0" />
+      <label for="nome">Nome</label>
       <input v-model="nome" type="text" id="nome" />
-      <label for="tel">Telefone</label><br />
+      <label for="tel">Telefone</label>
       <input v-model="tel" type="text" id="tel" />
       <button @click="addUser" class="success">Adicionar</button>
     </div>
     <div class="lista">
       <ul>
-        <li v-for="user in users" :key="user.id">
-          <user :user="user" />
-        </li>
+        <transition-group :duration="300" name="remove">
+          <li v-for="user in users" :key="user.id" class="remove-item">
+            <user :user="user" />
+          </li>
+        </transition-group>
       </ul>
     </div>
   </div>
@@ -54,9 +57,21 @@ export default {
   display: flex;
 
   .adicionar {
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
     flex: 1;
+    input {
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+    button,
+    label {
+      margin-top: 10px;
+    }
   }
   .lista {
+    position: relative;
     flex: 3;
   }
 }
@@ -65,5 +80,16 @@ ul {
 }
 li {
   list-style: none;
+}
+.remove-item {
+  transition: all 300ms;
+}
+.remove-enter,
+.remove-leave-to {
+  opacity: 0;
+}
+.remove-leave-active {
+  position: absolute;
+  width: 100%;
 }
 </style>

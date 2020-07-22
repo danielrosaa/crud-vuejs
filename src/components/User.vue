@@ -12,17 +12,19 @@
       </button>
       <button @click="removeUser(user.id)" class="danger">Remover</button>
     </div>
-    <div v-if="showEdit" class="modal">
-      <div @click="showEdit = false" class="fechar">x</div>
-      <h4>Atualizar usuário</h4>
-      <label for="nome">Nome</label>
-      <input v-model="nome" type="text" id="nome" />
-      <label for="tel">Telefone</label>
-      <input v-model="tel" type="text" id="tel" />
-      <button @click="editUser({ nome, tel }, user.id)" class="success">
-        Alterar
-      </button>
-    </div>
+    <transition name="fade">
+      <div v-if="showEdit" class="modal">
+        <div @click="showEdit = false" class="fechar">x</div>
+        <h4>Atualizar usuário</h4>
+        <label for="nome">Nome</label>
+        <input v-model="nome" type="text" id="nome" />
+        <label for="tel">Telefone</label>
+        <input v-model="tel" type="text" id="tel" />
+        <button @click="editUser({ nome, tel }, user.id)" class="success">
+          Alterar
+        </button>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -33,11 +35,13 @@ export default {
     return {
       showEdit: false,
       nome: null,
-      tel: null
+      tel: null,
+      remove: false
     };
   },
   methods: {
     removeUser(id) {
+      this.remove = true;
       this.$store.dispatch("removeUser", id);
     },
     editUser(update, id) {
@@ -53,6 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/css/_variables.scss";
 .user {
   height: 50px;
   display: inline-flex;
@@ -85,7 +90,7 @@ export default {
   border-radius: 5px;
   padding: 30px;
   width: 30vw;
-  background: white;
+  background: $bgColor;
   box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.3);
   input,
   label {
