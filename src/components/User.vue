@@ -7,34 +7,38 @@
       {{ user.phone }}
     </div>
     <div class="actions">
-      <button @click="showEdit = true" class="info">
+      <button @click="showEdit = true" class="info fab">
         <fa-icon icon="edit"></fa-icon>
       </button>
-      <button @click="removeUser(user.id)" class="danger">
+      <button @click="removeUser(user.id)" class="danger fab">
         <fa-icon icon="trash"></fa-icon>
       </button>
     </div>
     <transition name="fade">
       <div v-if="showEdit" class="modal">
-        <form>
-          <div @click="showEdit = false" class="fechar">x</div>
-          <h4>Atualizar usuário</h4>
-          <transition name="fade">
-            <div v-if="error" class="error">
-              Todos os campos são necessários
+        <div>
+          <form>
+            <div @click="showEdit = false" class="fechar">
+              <fa-icon icon="times" />
             </div>
-          </transition>
-          <label for="nome">Nome</label>
-          <input v-model="nome" type="text" id="nome" />
-          <label for="tel">Telefone</label>
-          <input v-model="tel" type="text" id="tel" />
-          <button
-            @click.prevent="editUser({ nome, tel }, user.id)"
-            class="success"
-          >
-            Alterar
-          </button>
-        </form>
+            <h4>Atualizar usuário</h4>
+            <transition name="fade">
+              <div v-if="error" class="error">
+                Todos os campos são necessários
+              </div>
+            </transition>
+            <label for="nome">Nome</label>
+            <input v-model="nome" type="text" id="nome" />
+            <label for="tel">Telefone</label>
+            <input v-model="tel" type="text" id="tel" />
+            <button
+              @click.prevent="editUser({ nome, tel }, user.id)"
+              class="success"
+            >
+              Alterar
+            </button>
+          </form>
+        </div>
       </div>
     </transition>
   </div>
@@ -42,8 +46,8 @@
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-library.add(faEdit, faTrash);
+import { faEdit, faTrash, faTimes } from "@fortawesome/free-solid-svg-icons";
+library.add(faEdit, faTrash, faTimes);
 export default {
   props: ["user"],
   data() {
@@ -83,15 +87,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/css/_variables.scss";
 .user {
   height: 50px;
   display: inline-flex;
-  justify-content: space-around;
   align-items: center;
   width: 100%;
   text-align: left;
-  padding: 0 50px;
   border-bottom: 1px solid lightgray;
   transition: all 300ms;
   &:hover {
@@ -110,32 +111,6 @@ export default {
   }
   &.alterado {
     animation: bounce 1.5s;
-  }
-}
-.modal {
-  form {
-    display: grid;
-  }
-  position: fixed;
-  top: 15vh;
-  border-radius: 5px;
-  padding: 30px;
-  width: 30vw;
-  background: $bgColor;
-  box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.3);
-  input,
-  label {
-    margin-bottom: 10px;
-  }
-  button,
-  label {
-    margin-top: 10px;
-  }
-  .fechar {
-    position: absolute;
-    right: 10px;
-    padding: 10px;
-    cursor: pointer;
   }
 }
 

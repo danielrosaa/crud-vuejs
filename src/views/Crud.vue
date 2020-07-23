@@ -3,12 +3,12 @@
     <div class="adicionar">
       <h4 style="margin-bottom: 5px; text-align:center">Adicionar usuário</h4>
       <hr style="width:100%; margin: 0; margin-bottom: 10px" />
+      <transition name="fade">
+        <div v-if="error" class="error">
+          Todos os campos são necessários
+        </div>
+      </transition>
       <form>
-        <transition name="fade">
-          <div v-if="error" class="error">
-            Todos os campos são necessários
-          </div>
-        </transition>
         <div class="form-item">
           <label for="nome">Nome</label>
           <input v-model="nome" type="text" id="nome" />
@@ -75,16 +75,17 @@ export default {
 .container {
   width: 80%;
   max-width: 960px;
-  display: flex;
 
   .adicionar {
     display: flex;
     flex-direction: column;
-    margin-right: 50px;
-    flex: 1;
+    form {
+      display: inline-flex;
+      justify-content: space-evenly;
+      align-items: flex-end;
+    }
     input {
       margin-top: 10px;
-      margin-bottom: 5px;
     }
     button,
     label {
@@ -98,7 +99,6 @@ export default {
   }
   .lista {
     position: relative;
-    flex: 3;
   }
 }
 ul {
